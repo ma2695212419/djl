@@ -1,0 +1,35 @@
+plugins {
+    id 'org.springframework.boot' version '2.3.11.RELEASE'
+    id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+    id 'java'
+}
+
+group = 'co.laomag'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '11'
+
+repositories {
+    jcenter()
+    mavenCentral()
+}
+//排除tomcat
+configurations {
+    compile.exclude module: 'spring-boot-starter-tomcat'
+}
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-undertow'
+    implementation "ai.djl:api:0.11.0"
+    implementation "ai.djl:basicdataset:0.11.0"
+    implementation "ai.djl:model-zoo:0.11.0"
+    runtimeOnly "ai.djl.pytorch:pytorch-model-zoo:0.11.0"
+    runtimeOnly "ai.djl.pytorch:pytorch-native-auto:1.8.1"
+    testImplementation('org.springframework.boot:spring-boot-starter-test') {
+        exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
+    }
+}
+
+test {
+    useJUnitPlatform()
+}
